@@ -39,8 +39,14 @@ const routes = [
   //我的-我的收藏
   {
     path: "/myavorite",
-    component: () => import("@/views/myFavorite/index.vue"),
+    component: () => import("@/views/user/myFavorite/index.vue"),
     name: "myavorite",
+  },
+  // 我的出租
+  {
+    path: "/myrentout",
+    component: () => import("@/views/user/rentOut/index.vue"),
+    name: "myrentout",
   },
   //城市列表
   {

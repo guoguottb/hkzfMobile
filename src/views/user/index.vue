@@ -39,7 +39,7 @@
           <van-icon name="star-o" size="20px" />
           <span>我的收藏</span>
         </li>
-        <li>
+        <li @click="myRentOut">
           <van-icon name="wap-home-o" size="20px" /> <span>我的出租</span>
         </li>
         <li><van-icon name="clock-o" size="20px" /> <span>看房记录</span></li>
@@ -77,6 +77,10 @@ export default {
       this.$router.push({
         name: "myavorite",
       });
+    },
+    // 我的出租按钮
+    myRentOut() {
+      this.$router.push("/myrentout");
     },
   },
 };

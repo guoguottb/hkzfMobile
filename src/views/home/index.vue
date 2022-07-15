@@ -1,10 +1,11 @@
 <template>
   <div>
-    <!-- <van-search
-      v-model="value"
-      placeholder="请输入搜索关键词"
-      class="searchInput"
-    /> -->
+    <!-- input 搜索框 -->
+    <div id="searchInput">
+      <div>
+        <input type="text" placeholder="请输入小区或地址" @click="toCityList" />
+      </div>
+    </div>
     <!-- banner -->
     <van-swipe class="my-swipe" :autoplay="3000" indicator-color="white">
       <van-swipe-item>
@@ -87,10 +88,37 @@ export default {
       select: "北京",
     };
   },
+  // 方法
+  methods: {
+    toCityList() {
+      this.$router.push("/citylist");
+    },
+  },
 };
 </script>
 
+
 <style scoped lang="less">
+//顶部搜索框
+#searchInput {
+  width: 100%;
+  height: 34px;
+  position: absolute;
+  z-index: 99;
+  padding: 5px 5px 5px 8px;
+  border-radius: 3px;
+  > div {
+    width: 100%;
+    height: 100%;
+
+    input {
+      height: 100%;
+      font-size: 12px;
+      background-color: #ccc;
+    }
+  }
+}
+
 .searchInput {
   position: absolute;
   top: 0;
