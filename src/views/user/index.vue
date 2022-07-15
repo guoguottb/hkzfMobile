@@ -58,7 +58,6 @@
 </template>
 
 <script>
-import { login } from "@/apis/user/login";
 export default {
   data() {
     return {
@@ -74,11 +73,11 @@ export default {
     },
     //退出账号按钮
     btnClear() {},
-    goMyAvorite(){
+    goMyAvorite() {
       this.$router.push({
-        name: "myavorite"
-      })
-    }
+        name: "myavorite",
+      });
+    },
   },
 };
 </script>
