@@ -33,20 +33,28 @@
     <div>
       <ul id="icon">
         <li>
-          <van-icon name="wap-home-o" size="40px" />
+          <div>
+            <span class="iconfont icon-31shouye"></span>
+          </div>
           <p>整租</p>
         </li>
         <li>
-          <van-icon name="friends-o" size="40px" />
+          <div>
+            <span class="iconfont icon-friend"></span>
+          </div>
           <p>合租</p>
         </li>
         <li>
-          <van-icon name="wap-home-o" size="40px" />
+          <div>
+            <span class="iconfont icon-dituzhaofang"></span>
+          </div>
           <p>地图找房</p>
         </li>
         <li>
-          <van-icon name="wap-home-o" size="40px" />
-          <p>去租房</p>
+          <div>
+            <span class="iconfont icon-fangwu"></span>
+          </div>
+          <p>去出租</p>
         </li>
       </ul>
     </div>
@@ -57,6 +65,14 @@
           <span>租房小组</span>
           <i>更多</i>
         </p>
+        <div class="imgs">
+          <ul>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
@@ -68,7 +84,7 @@ export default {
     return {
       value: "",
       input3: "",
-      select:"北京"
+      select: "北京",
     };
   },
 };
@@ -95,16 +111,32 @@ export default {
   height: 122px;
   display: flex;
   justify-content: space-between;
+
   li {
     flex: 1;
     text-align: center;
     padding: 10px 0;
-    span {
-      width: 40px;
-      height: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    div {
+      width: 60px;
+      height: 60px;
+      background-color: rgb(242, 251, 247);
+      border-radius: 50%;
+      text-align: center;
+      line-height: 60px;
+
+      span {
+        color: rgb(30, 174, 104);
+        font-size: 28px;
+      }
     }
+
     p {
       font-size: 14px;
+      margin-top: 6px;
     }
   }
 }
@@ -112,6 +144,8 @@ export default {
 #tenement {
   background-color: rgb(246, 245, 246);
   padding: 0 10px;
+
+  // 租房小组 title
   #titleName {
     display: flex;
     justify-content: space-between;
@@ -119,14 +153,21 @@ export default {
     line-height: 16px;
     padding: 15px 0 15px 10px;
 
+    // 文字 租房小组
     span {
       font-weight: 900;
     }
 
+    //更多
     i {
       font-size: 14px;
       color: rgb(120, 125, 130);
     }
+  }
+
+  // 租房小组下方图片
+  #imgs ul {
+    display: flex;
   }
 }
 </style>

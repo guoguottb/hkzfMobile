@@ -2,19 +2,31 @@
   <div>
     <router-view></router-view>
     <!-- footer -->
-    <van-tabbar v-model="active"  inactive-color="#000">
-      <van-tabbar-item name="home" icon="home-o" to="/hkzf/home"
-        >首页</van-tabbar-item
-      >
-      <van-tabbar-item name="search" icon="search" to="/hkzf/search"
-        >搜索</van-tabbar-item
-      >
-      <van-tabbar-item name="friends" icon="friends-o" to="/hkzf/consult"
-        >资讯</van-tabbar-item
-      >
-      <van-tabbar-item name="setting" icon="setting-o" to="/hkzf/user"
-        >我的</van-tabbar-item
-      >
+    <van-tabbar route>
+      <van-tabbar-item icon="home-o" to="/hkzf/home">
+        <template #icon>
+          <span class="iconfont icon-31shouye"></span>
+          <span class="text">首页</span>
+        </template>
+      </van-tabbar-item>
+      <van-tabbar-item icon="home-o" to="/hkzf/search">
+        <template #icon>
+          <span class="iconfont icon-sousuo"></span>
+          <span class="text">找房</span>
+        </template>
+      </van-tabbar-item>
+      <van-tabbar-item icon="home-o" to="/hkzf/consult">
+        <template #icon>
+          <span class="iconfont icon-zixun"></span>
+          <span class="text">资讯</span>
+        </template>
+      </van-tabbar-item>
+      <van-tabbar-item icon="home-o" to="/hkzf/user">
+        <template #icon>
+          <span class="iconfont icon-wode"></span>
+          <span class="text">我的</span>
+        </template>
+      </van-tabbar-item>
     </van-tabbar>
   </div>
 </template>
@@ -22,12 +34,25 @@
 <script>
 export default {
   data() {
-    return {
-      active: "home",
-    };
+    return {};
   },
 };
 </script>
 
-<style>
+<style lang="less" scoped>
+:deep(.van-tabbar-item__icon) {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  height: 100%;
+  justify-content: space-evenly;
+
+  .iconfont {
+    font-size: 22px;
+  }
+
+  .text {
+    font-size: 12px;
+  }
+}
 </style>

@@ -44,18 +44,32 @@ export default {
   },
   methods: {
     async onSubmit() {
-      // Toast.success("成功文案");
-      // Toast.fail("失败文案");
-      const res = await login(this.username, this.password);
-      if (res.data.status !== 200) {
-        return Toast.fail("用户名或密码错误");
-      }
-      // localStorage.setItem("token", res.data.body.token);
-      localStorage.setItem("token", JSON.stringify(res.data.body.token));
-      this.$router.push({
-        name: "home",
+      this.$toast.loading({
+        message: "加载中...",
+        forbidClick: true,
       });
-      Toast.success("登录成功");
+      try {
+        const res = await login(this.username, this.password);
+        // 1. 存储token
+        this.$store.commit("setUser", res.data.body.token);
+        // 2. 页面跳转
+        this.$router.push({
+          name: "home",
+        });
+        // 3. 提示消息
+        this.$toast.success("登陆成功");
+      } catch (error) {
+        console.log(error);
+        if (error.message === "timeout of 10000ms exceeded") {
+          return this.$toast.fail("登录超时");
+        }
+        // const status = error.data.status;
+        // let message = "登陆失败，请重试！";
+        // if (status === 400 || status === 401) {
+        //   message = error.data.description;
+        // }
+        // this.$toast.fail(message);
+      }
     },
   },
   //复用组件
