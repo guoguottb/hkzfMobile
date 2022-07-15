@@ -1,27 +1,61 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import HomeView from '../views/HomeView.vue'
-
-Vue.use(VueRouter)
+import Vue from "vue";
+import VueRouter from "vue-router";
+// let routerPush = VueRouter.prototype.push;
+// VueRouter.prototype.push = function push(location) {
+//   return routerPush.call(this, location).catch((err) => err);
+// };
+Vue.use(VueRouter);
 
 const routes = [
+  { path: "/", redirect: "/hkzf/home" },
   {
-    path: '/',
-    name: 'home',
-    component: HomeView
+    path: "/login",
+    component: () => import("@/views/login/index"),
+    name: "login",
   },
   {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
-  }
-]
+    path: "/hkzf",
+    component: () => import("@/views/hkzf/index.vue"),
+    children: [
+      {
+        path: "/hkzf/home",
+        component: () => import("@/views/home/index.vue"),
+        name: "home",
+      },
+      {
+        path: "/hkzf/search",
+        component: () => import("@/views/search/index.vue"),
+      },
+      {
+        path: "/hkzf/consult",
+        component: () => import("@/views/consult/index.vue"),
+      },
+      {
+        path: "/hkzf/user",
+        component: () => import("@/views/user/index.vue"),
+      },
+    ],
+  },
+  //我的-我的收藏
+  {
+    path: "/myavorite",
+    component: () => import("@/views/myFavorite/index.vue"),
+    name: "myavorite",
+  },
+  //城市列表
+  {
+    path: "/citylist",
+    component: () => import("@/views/cityList/index.vue"),
+    name: "cityList",
+  },
+  {
+    path: "*",
+    component: () => import("@/views/404/index.vue"),
+  },
+];
 
 const router = new VueRouter({
-  routes
-})
+  routes,
+});
 
-export default router
+export default router;
