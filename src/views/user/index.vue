@@ -80,7 +80,18 @@ export default {
     },
     //退出账号按钮
     btnClear() {
-      this.$store.commit("setUser", "");
+      this.$dialog
+        .confirm({
+          title: "提示",
+          message: "是否确认退出",
+        })
+        .then(() => {
+          // on confirm
+          this.$store.commit("setUser", "");
+        })
+        .catch(() => {
+          // on cancel
+        });
     },
     // 我的收藏 按钮
     goMyAvorite() {
