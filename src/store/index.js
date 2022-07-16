@@ -6,7 +6,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   //数据
   state: {
-    user: getToken() || {},
+    user: getToken() || "",
   },
   getters: {},
   mutations: {

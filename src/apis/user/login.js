@@ -12,14 +12,18 @@ export const login = (username, password) => {
   });
 };
 
+// 登录成功 获取用户信息
+export const getUserInfo = () => {
+  return request({
+    url: "/user",
+  });
+};
+
 //我的收藏
 export const myFavorite = (token) => {
   return request({
     method: "GET",
     url: "/user/favorites",
-    headers: {
-      authorization: token,
-    },
   });
 };
 

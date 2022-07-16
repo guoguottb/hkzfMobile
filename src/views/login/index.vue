@@ -50,26 +50,22 @@ export default {
       });
       try {
         const res = await login(this.username, this.password);
+        // 如果状态码不等于200 提示一个其返回的报错
+        if (res.data.status !== 200) {
+          const status = res.data.status;
+          let message = "登陆失败，请重试！";
+          if (status === 400 || status === 401) {
+            message = res.data.description;
+          }
+          return this.$toast.fail(message);
+        }
         // 1. 存储token
         this.$store.commit("setUser", res.data.body.token);
         // 2. 页面跳转
-        this.$router.push({
-          name: "home",
-        });
+        this.$router.push("/hkzf/user");
         // 3. 提示消息
         this.$toast.success("登陆成功");
-      } catch (error) {
-        console.log(error);
-        if (error.message === "timeout of 10000ms exceeded") {
-          return this.$toast.fail("登录超时");
-        }
-        // const status = error.data.status;
-        // let message = "登陆失败，请重试！";
-        // if (status === 400 || status === 401) {
-        //   message = error.data.description;
-        // }
-        // this.$toast.fail(message);
-      }
+      } catch (error) {}
     },
   },
   //复用组件

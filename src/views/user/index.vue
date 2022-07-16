@@ -2,8 +2,26 @@
   <div>
     <!--  -->
     <div id="header">
-      <img src="http://liufusong.top:8080/img/profile/bg.png" alt="" />
+      <img
+        :src="
+          isShow
+            ? `http://liufusong.top:8080${userInfo.avatar}`
+            : `http://liufusong.top:8080/img/profile/bg.png`
+        "
+        alt=""
+      />
       <template v-if="isShow">
+        <div id="mytitle">
+          <div class="block">
+            <img :src="`http://liufusong.top:8080${userInfo.avatar}`" alt="" />
+          </div>
+          <p>{{ userInfo.nickname }}</p>
+          <div>
+            <button @click="btnClear" class="btn">退出</button>
+          </div>
+        </div>
+      </template>
+      <template v-else>
         <div id="mytitle">
           <div class="block">
             <img
@@ -17,20 +35,6 @@
           </div>
         </div></template
       >
-      <template v-else>
-        <div id="mytitle">
-          <div class="block">
-            <img
-              src="http://liufusong.top:8080/img/profile/avatar.png"
-              alt=""
-            />
-          </div>
-          <p>好客_845296</p>
-          <div>
-            <button @click="btnClear" class="btn">退出</button>
-          </div>
-        </div>
-      </template>
     </div>
     <!-- 我的收藏等6个图标 -->
     <div id="icon">
@@ -58,12 +62,15 @@
 </template>
 
 <script>
+// 引入API
+import { getUserInfo } from "@/apis";
 export default {
   data() {
     return {
-      isShow: true,
+      userInfo: [],
     };
   },
+  // 方法
   methods: {
     //去登陆按钮
     btn() {
@@ -72,16 +79,49 @@ export default {
       });
     },
     //退出账号按钮
-    btnClear() {},
+    btnClear() {
+      this.$store.commit("setUser", "");
+    },
+    // 我的收藏 按钮
     goMyAvorite() {
-      this.$router.push({
-        name: "myavorite",
-      });
+      if (this.isShow) {
+        this.$router.push({
+          name: "myavorite",
+        });
+      } else {
+        this.$router.push("/login");
+      }
     },
-    // 我的出租按钮
+    // 我的出租 按钮
     myRentOut() {
-      this.$router.push("/myrentout");
+      if (this.isShow) {
+        this.$router.push("/myrentout");
+      } else {
+        this.$router.push("/login");
+      }
     },
+    // 获取用户信息
+    async getUserInfo() {
+      try {
+        const res = await getUserInfo();
+        this.userInfo = res.data.body;
+        console.log(this.userInfo);
+      } catch (error) {
+        console.log(error);
+      }
+    },
+  },
+  // 计算属性
+  computed: {
+    isShow() {
+      return !!this.$store.state.user;
+    },
+  },
+  // 创建后
+  created() {
+    if (this.isShow) {
+      this.getUserInfo();
+    }
   },
 };
 </script>
