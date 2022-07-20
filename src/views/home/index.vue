@@ -301,7 +301,7 @@ export default {
 .mainList {
   width: 100%;
   height: 140px;
-  // background-color: red;
+  background-color: #F6F5F6;
   padding-left: 10px;
   display: flex;
   flex-wrap: wrap;

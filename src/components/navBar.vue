@@ -5,6 +5,7 @@
       left-arrow
       @click-left="onClickLeft"
       class="nav-bar"
+      fixed
     />
     <div class="top-div"></div>
   </div>
