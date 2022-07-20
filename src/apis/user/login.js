@@ -37,3 +37,10 @@ export const rentOut = (token) => {
     },
   });
 };
+
+// 获取房屋详情
+export const getParticulars = (code) => {
+  return request({
+    url: `/houses/${code}`,
+  });
+};

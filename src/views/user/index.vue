@@ -130,6 +130,7 @@ export default {
   },
   // 创建后
   created() {
+    console.log(this);
     if (this.isShow) {
       this.getUserInfo();
     }

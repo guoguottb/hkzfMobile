@@ -1,5 +1,5 @@
 <template>
-  <div id="collect">
+  <div id="collect" @click="particulars">
     <div class="left">
       <img :src="`http://liufusong.top:8080${item.houseImg}`" alt="" />
     </div>
@@ -22,12 +22,35 @@ export default {
   data() {
     return {};
   },
+  // 父传子
   props: {
     item: {
       type: Object,
       default: () => {
         return {};
       },
+    },
+  },
+  methods: {
+    // 点击跳转到房屋详情
+    particulars() {
+      console.log(this.isShow);
+      if (this.isShow) {
+        // 存储 房屋id
+        this.$store.commit("setHousesCode", this.item.houseCode);
+        console.log("ok");
+        this.$router.push(`/details/${this.item.houseCode}`);
+      } else {
+        this.$router.push("/login");
+      }
+    },
+    // 获取房屋详情的接口
+    getParticulars() {},
+  },
+  computed: {
+    // 判断是否有token
+    isShow() {
+      return !!this.$store.state.user;
     },
   },
 };

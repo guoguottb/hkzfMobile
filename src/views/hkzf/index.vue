@@ -2,7 +2,7 @@
   <div>
     <router-view></router-view>
     <!-- footer -->
-    <van-tabbar route>
+    <van-tabbar route v-model="active">
       <van-tabbar-item icon="home-o" to="/hkzf/home">
         <template #icon>
           <span class="iconfont icon-31shouye"></span>
@@ -34,7 +34,9 @@
 <script>
 export default {
   data() {
-    return {};
+    return {
+      active: 0,
+    };
   },
 };
 </script>
